@@ -1,4 +1,5 @@
 import streamlit as st
+import uuid
 import pandas as pd
 import numpy as np
 import io
@@ -12,13 +13,22 @@ from reportlab.lib.styles import getSampleStyleSheet
 from pptx import Presentation
 from pptx.util import Inches, Pt
 
+# --- Initialize the uploader key for true reset ---
+if "uploader_key" not in st.session_state:
+    st.session_state["uploader_key"] = str(uuid.uuid4())
+
 # --- Load OpenAI API key
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 st.title("🧠 ClaimSight – Reimbursement Forecasting & Delay Analyzer")
 st.image("claimsight_logo.png", width=200)
 
-uploaded_file = st.file_uploader("📤 Upload your claim CSV (any format/order/labels!)", type=["csv"])
+# ---- USE THE SESSION KEY ----
+uploaded_file = st.file_uploader(
+    "📤 Upload your claim CSV (any format/order/labels!)",
+    type=["csv"],
+    key=st.session_state["uploader_key"]  
+)
 
 if uploaded_file:
     # --- Flexible import (column aliasing)
@@ -364,3 +374,9 @@ if uploaded_file:
             file_name="ClaimSight_Report.pptx",
             mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
         )
+# --- RESET BUTTON (ALWAYS VISIBLE AT BOTTOM OF APP) ---
+st.markdown("---")
+if st.button("🔄 Reset / Start Over"):
+    st.session_state.clear()  # Clear everything
+    st.session_state["uploader_key"] = str(uuid.uuid4())  # New key for uploader
+    st.rerun()  # Full rerun, now uploader is also reset!
