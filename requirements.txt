@@ -5,3 +5,4 @@ altair
 matplotlib
 reportlab
 python-pptx
+dummy-package-for-test
