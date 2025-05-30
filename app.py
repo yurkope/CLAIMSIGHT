@@ -380,3 +380,9 @@ if st.button("🔄 Reset / Start Over"):
     st.session_state.clear()  # Clear everything
     st.session_state["uploader_key"] = str(uuid.uuid4())  # New key for uploader
     st.rerun()  # Full rerun, now uploader is also reset!
+
+st.markdown("---")
+st.markdown(
+    '💡 **Have feedback or ideas? [Let us know!](https://docs.google.com/forms/d/e/1FAIpQLSfm7kcmuA9pg_oenYrFQ62exJsvYcNHKV9Zb7b8RzaUOz_KHg/viewform?usp=sharing&ouid=104679907223026161047)**',
+    unsafe_allow_html=True
+)
