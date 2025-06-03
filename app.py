@@ -23,6 +23,19 @@ client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 st.title("🧠 ClaimSight – Reimbursement Forecasting & Delay Analyzer")
 st.image("claimsight_logo.png", width=200)
 
+st.markdown(
+    """
+    <div style="background-color:#ffeaea; padding:15px; border:2px solid #ff3b3b; border-radius:7px;">
+        <span style="color:#d90429; font-weight:bold; font-size:1.1em;">
+            ⚠️ Please ensure your claims file does NOT include any patient names, dates of birth, or PHI.<br>
+            Files should be de-identified before upload.<br>
+            <b>Any PHI is ignored and never retained or stored.</b>
+        </span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 # 👇 Add instructions for sample file and CSV flexibility here!
 st.markdown("""
 👋 **Want to see how ClaimSight works?**
