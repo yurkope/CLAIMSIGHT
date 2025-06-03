@@ -23,11 +23,25 @@ client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 st.title("🧠 ClaimSight – Reimbursement Forecasting & Delay Analyzer")
 st.image("claimsight_logo.png", width=200)
 
+# 👇 Add instructions for sample file and CSV flexibility here!
+st.markdown("""
+👋 **Want to see how ClaimSight works?**
+- [⬇️ Download a Sample Claims File](https://drive.google.com/file/d/1mc03haJ6znwXFBuqrNTK-aOxtQ_OYn1g/view?usp=sharing)
+- Or upload your own de-identified claims file—ClaimSight works with any CSV format!
+""")
+
 # ---- USE THE SESSION KEY ----
 uploaded_file = st.file_uploader(
     "📤 Upload your claim CSV (any format/order/labels!)",
     type=["csv"],
     key=st.session_state["uploader_key"]  
+)
+st.markdown("_Your data is processed securely and never stored. All uploads are de-identified._")
+st.markdown(
+    '<a href="https://claimsight.carrd.co/" target="_blank" style="text-decoration:none;">'
+    '🌐 <b>Learn more at claimsight.carrd.co</b>'
+    '</a>',
+    unsafe_allow_html=True
 )
 
 if uploaded_file:
@@ -384,5 +398,13 @@ if st.button("🔄 Reset / Start Over"):
 st.markdown("---")
 st.markdown(
     '💡 **Have feedback or ideas? [Let us know!](https://docs.google.com/forms/d/e/1FAIpQLSfm7kcmuA9pg_oenYrFQ62exJsvYcNHKV9Zb7b8RzaUOz_KHg/viewform?usp=sharing&ouid=104679907223026161047)**',
+    unsafe_allow_html=True
+)
+
+st.markdown("---")
+st.markdown(
+    '<a href="https://claimsight.carrd.co/" target="_blank" style="text-decoration:none;">'
+    '🌐 <b>Learn more at claimsight.carrd.co</b>'
+    '</a>',
     unsafe_allow_html=True
 )
